@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js "></script>
+</head>
+<body>
+    <h1>Sign Up</h1>
+    <from action="signUp.php" method="POST">
+    Username: <input type="text" name="username" id="username">
+    <br><br>
+    Password: <input type="password" name="password" id="password">
+    <br><br>
+    Confirm Password: <input type="password" name="confirm-password" id="ccpassword">
+    <br><br>
+    Birthday: <input type="date" name="birthday" id="birthday">
+    </from>
+    <button id="submit">Submit</button>
+    <script type="text/javascript">
+    $(document).ready(function() {
+$("#submit").on("click",function(){
+    const username = $("#username").val();
+    const password = $("#password").val();
+    const ccpassword = $("#ccpassword").val();
+    const birthday = $("#birthday").val();
+
+
+$.ajax({
+url: 'signUp.php',
+type: 'POST',
+
+data: {
+usernamePHP: username,
+passwordPHP: password,
+ccPasswordPHP: ccpassword,
+birthdayPHP: birthday
+},
+dataType: 'text',
+success: function(txt) {
+alert(txt);
+},
+error: function(errorObj,txt){
+alert(errorObj.status+" "+errorObj.statusText);
+}
+})
+})
+
+    })
+    </script>
+</body>
+</html>
