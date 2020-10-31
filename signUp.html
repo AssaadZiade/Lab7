@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <h1>Sign Up</h1>
+
+    Username: <input type="text" id="name">
+    <br><br>
+    Password: <input type="password" id="password">
+    <br><br>
+    Confirm Password: <input type="password" id="ccpassword">
+    <br><br>
+    Birthday: <input type="date" id="birthday">
+    <br><br>
+    <button type="submit" id="submit">Submit</button>
+    <script type="text/javascript">
+            $(document).ready(function () {
+            $("#submit").on('click', function () {
+
+            console.log($("#name").val());
+
+            $.ajax({
+            url: 'signUp.php',
+            type: 'POST',
+            data: {
+            username: $("#name").val(),
+            password: $("#password").val(),
+            ccpassword: $("#ccpassword").val(),
+            birthday: $("#birthday").val()
+            },
+            dataType: 'text',
+            success: function (response) {
+            alert(response);
+            if (response.includes("SUCCESS")){
+            window.location.href = "homepage.html";
+            }
+            },
+            error: function () {
+            alert("error");
+            }
+            })
+            })
+
+            });
+    </script>
+
+</body>
+
+
+</html>
