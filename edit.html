@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <h1>Change your password here: </h1><br><br>
+    Enter your username: <input type="text" id="username"><br><br>
+    Enter your old password: <input type="password" id="oldPassword"><br><br>
+    Enter your new password: <input type="password" id="newPassword"><br><br>
+    <button id = "change">Change</button>
+    <script type="text/javascript">
+$(document).ready(function () {
+$("#change").on('click', function () {
+
+$.ajax({
+url: 'changepassword.php',
+type: 'POST',
+data: {
+    username: $("#username").val(),
+oldPassword: $("#oldPassword").val(),
+newPassword: $("#newPassword").val()
+},
+dataType: 'text',
+success: function (response) {
+alert(response);
+if(response.includes("Done")){
+    alert("Password Changed!");
+window.location.href = "homepage.html";
+}
+},
+error: function () {
+alert("error");
+}
+})
+})
+
+});
+
+    </script>
+</body>
+</html>
