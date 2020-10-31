@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Front Page</title>
+
+</head>
+<body>
+    <fieldset>
+        <legend>Already Signed Up! </legend>
+         Username: <input type="text" name="username" id="name">
+         <br><br>
+         Password: <input type="password" name="password" id="password">
+         <br><br>
+         <button id="sign-in">Sign In</button>
+    </fieldset>
+    <br><br>
+    <button id="sign-up">Sign Up</button>
+    <script type="text/javascript">
+     $(document).ready(function () {
+document.getElementById("sign-up").addEventListener('click', () =>{
+window.location.href = "./signUp.html";
+});
+     $("#sign-in").on('click', function () {
+         if( $("#name").val() == "admin" && $("#password").val() == "admin") {
+             console.log("hey");
+             window.location.href = "admin.html";
+         } else {
+             $.ajax({
+             url: 'signIn.php',
+             type: 'POST',
+             data: {
+             username: $("#name").val(),
+             password: $("#password").val()
+             },
+             dataType: 'text',
+             success: function (response) {
+             alert(response);
+             if(response.includes("Logged In")){
+             window.location.href = "edit.html";
+
+             }
+             },
+             error: function () {
+             alert("error");
+             }
+             })
+             };
+
+
+
+     });
+    });
+    </script>
+    
+</body>
+</html>
